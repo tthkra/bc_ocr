@@ -57,7 +57,6 @@ class InfoProcessor {
   InfoProcessor({required this.infoCardKey , required this.infoTileKey});
 
   Future<void> processTextArray(List<String> textLines) async {
-
     Map<String, String?> details = {
       'name': null,
       'position': null,
@@ -69,6 +68,18 @@ class InfoProcessor {
       'address': null,
       'url': null,
     };
+
+    // List<String> containsOnlyEnglish(List<String> textLines) {
+    //   RegExp pattern = RegExp(r'[^\x00-\x7F]+');
+    //   return textLines.where((line) => !pattern.hasMatch(line)).toList();
+    // }
+    //
+    // List<String> filterNonEnglish(List<String> textLines) {
+    //   return textLines.where((line) => containsOnlyEnglish(line)).toList();
+    // }
+    //   // Filter out non english text
+    //   textLines = filterNonEnglish(textLines);
+    // print(textLines);
 
 
     List<bool> usedLines = List<bool>.filled(textLines.length, false);

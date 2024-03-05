@@ -43,17 +43,15 @@ class _ScannedImgState extends State<ScannedImg> {
             extractedTexts.add(line.text);
           }
         }
-
+        print(extractedTexts);
         widget.processor.processTextArray(extractedTexts);
 
-        // _text = await FlutterTesseractOcr.extractText(getImage.path);
-        // List<String> textLines = _text.split('\n').where((line) => line.isNotEmpty).toList();
-        // widget.processor.processTextArray(textLines);
       }
     } catch (e) {
       print(e.toString());
     }
   }
+
 
   @override
   Widget build(BuildContext context) {

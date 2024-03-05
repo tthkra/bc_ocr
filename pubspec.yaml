@@ -15,6 +15,7 @@ dependencies:
   google_mlkit_entity_extraction: ^0.11.0
   tflite_flutter: 0.10.0 #correct version (0.10.0)
   shimmer: ^3.0.0
+  permission_handler: ^11.3.0
 
 dev_dependencies:
   flutter_test:
@@ -25,7 +26,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
-    - assets/tessdata/eng.traineddata
     - assets/model.tflite
     - assets/word_index.json
   # An image asset can refer to one or more resolution-specific "variants", see
