@@ -3,9 +3,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_tesseract_ocr/flutter_tesseract_ocr.dart';
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'package:google_mlkit_commons/google_mlkit_commons.dart';
 import 'package:image_picker/image_picker.dart';
 import 'utils/classify_text.dart';
 import 'utils/modal_selector.dart';
+
 
 
 class ScannedImg extends StatefulWidget {
@@ -22,6 +25,7 @@ class _ScannedImgState extends State<ScannedImg> {
   String _text = '';
   File? _pickedImg;
   final ImagePicker _imagePicker = ImagePicker();
+  final textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
 
   Future<void> pickImage(ImageSource? source) async {
     try {
@@ -30,9 +34,22 @@ class _ScannedImgState extends State<ScannedImg> {
         setState(() {
           _pickedImg = File(getImage.path);
         });
-        _text = await FlutterTesseractOcr.extractText(getImage.path);
-        List<String> textLines = _text.split('\n').where((line) => line.isNotEmpty).toList();
-        widget.processor.processTextArray(textLines);
+
+        final inputImage = InputImage.fromFilePath(getImage.path);
+        final RecognizedText recognizedText = await textRecognizer.processImage(inputImage);
+
+        List<String> extractedTexts = [];
+        for (TextBlock block in recognizedText.blocks) {
+          for (TextLine line in block.lines) {
+            extractedTexts.add(line.text);
+          }
+        }
+
+        widget.processor.processTextArray(extractedTexts);
+
+        // _text = await FlutterTesseractOcr.extractText(getImage.path);
+        // List<String> textLines = _text.split('\n').where((line) => line.isNotEmpty).toList();
+        // widget.processor.processTextArray(textLines);
       }
     } catch (e) {
       print(e.toString());
