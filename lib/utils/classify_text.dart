@@ -103,7 +103,6 @@ class InfoProcessor {
           details['name'] = textLines[i - 1];
           usedLines[i-1] = true;
         }
-        print('ur safe girl');
         break;
       }
     }
