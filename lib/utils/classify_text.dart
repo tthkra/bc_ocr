@@ -118,7 +118,7 @@ class textProcessor {
       'url': null,
     };
 
-
+    // clean scanned text lines
     List<String> containsOnlyEnglish(List<String> textLines) {
       RegExp pattern = RegExp(r'^[ -~]*$', unicode: true);
       return textLines.where((line) => pattern.hasMatch(line)).toList();
@@ -189,7 +189,7 @@ class textProcessor {
         }
       }
     }
-
+    //get job title and person name
     for (int i = 0; i < textLines.length; i++) {
       String line = textLines[i];
       String classification = await runModel(line);
@@ -203,7 +203,7 @@ class textProcessor {
         break;
       }
     }
-
+    //get company name
     for (int i = 0; i < textLines.length; i++) {
       String line = textLines[i];
       String classification = await runModel2(line);
