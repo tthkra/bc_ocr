@@ -11,7 +11,7 @@ import 'utils/modal_selector.dart';
 
 
 class ScannedImg extends StatefulWidget {
-  final InfoProcessor processor;
+  final textProcessor processor;
   final VoidCallback onReset;
 
   ScannedImg({Key? key, required this.processor, required this.onReset}) : super(key: key);

@@ -13,12 +13,12 @@ class MyHomePage extends StatefulWidget {
 class _HomePageState extends State<MyHomePage> {
   final GlobalKey<InfoCardState> infoCardKey = GlobalKey();
   final GlobalKey<InfoTileState> infoTileKey = GlobalKey();
-  late final InfoProcessor processor;
+  late final textProcessor processor;
 
   @override
   void initState() {
     super.initState();
-    processor = InfoProcessor(infoCardKey: infoCardKey, infoTileKey: infoTileKey);
+    processor = textProcessor(infoCardKey: infoCardKey, infoTileKey: infoTileKey);
   }
 
   void resetState() {

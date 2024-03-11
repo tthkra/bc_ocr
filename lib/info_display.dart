@@ -230,27 +230,27 @@ class InfoTileState extends State<InfoTile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (phoneNumber != "")
-                buildInfoOrShimmerContainer(Icons.phone, phoneNumber),
+                infoOrShimmerContainer(Icons.phone, phoneNumber),
 
               SizedBox(height: phoneNumber != "" ? 16 : 0),
 
               if (phoneNumber2 != "")
-                buildInfoOrShimmerContainer(Icons.phone, phoneNumber2),
+                infoOrShimmerContainer(Icons.phone, phoneNumber2),
 
               SizedBox(height: phoneNumber2 != "" ? 16 : 0),
 
               if (address != "")
-                buildInfoOrShimmerContainer(Icons.location_on, address),
+                infoOrShimmerContainer(Icons.location_on, address),
 
               SizedBox(height: address != "" ? 16 : 0),
 
               if (email != "")
-                buildInfoOrShimmerContainer(Icons.email, email),
+                infoOrShimmerContainer(Icons.email, email),
 
               SizedBox(height: email != "" ? 16 : 0),
 
               if (url != "")
-                buildInfoOrShimmerContainer(Icons.public, url),
+                infoOrShimmerContainer(Icons.public, url),
             ].where((element) => element != null).toList(), //remove null elements that might result from conditionals
           ),
         ),
@@ -259,7 +259,7 @@ class InfoTileState extends State<InfoTile> {
   }
 
 // build info container or display a shimmer
-  Widget buildInfoOrShimmerContainer(IconData icon, String? text) {
+  Widget infoOrShimmerContainer(IconData icon, String? text) {
     return text == null ? Container(
       decoration: BoxDecoration(
         color: Colors.grey[300],

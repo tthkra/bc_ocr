@@ -6,6 +6,7 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   await modelInputProcessor.loadVocabulary();
+  await modelInputProcessor.loadVocabulary2();
 
   runApp(const MyApp());
 }
