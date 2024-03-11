@@ -56,7 +56,7 @@ Future<String> runModel2(String text) async {
   late tfl.Interpreter interpreter;
   try {
     interpreter = await tfl.Interpreter.fromAsset('assets/comp_per_model.tflite');
-    print("Model loaded successfully");
+    print("Model2 loaded successfully");
   } catch (e) {
     print("Failed to load the model: $e");
     return 'Error';
@@ -117,6 +117,19 @@ class textProcessor {
       'address': null,
       'url': null,
     };
+
+
+    List<String> containsOnlyEnglish(List<String> textLines) {
+      RegExp pattern = RegExp(r'^[ -~]*$', unicode: true);
+      return textLines.where((line) => pattern.hasMatch(line)).toList();
+    }
+
+    List<String> filterNonEnglish(List<String> textLines) {
+      return textLines.where((line) => !containsOnlyEnglish([line]).isEmpty).toList();
+    }
+
+    textLines = filterNonEnglish(textLines);
+    print(textLines);
 
 
     List<bool> usedLines = List<bool>.filled(textLines.length, false);
@@ -180,24 +193,14 @@ class textProcessor {
     for (int i = 0; i < textLines.length; i++) {
       String line = textLines[i];
       String classification = await runModel(line);
-      if (!usedLines[i]) {
-        if (classification == "POS") {
-          details['position'] = line;
-          usedLines[i] = true;
-          break;
+      if (classification == "POS") {
+        details['position'] = line;
+        usedLines[i] = true;
+        if (i > 0) {
+          details['name'] = textLines[i - 1];
+          usedLines[i - 1] = true;
         }
-      }
-    }
-
-    for (int i = 0; i < textLines.length; i++) {
-      String line = textLines[i];
-      String classification = await runModel2(line);
-      if (!usedLines[i]) {
-        if (classification == "PER") {
-          details['name'] = line;
-          usedLines[i] = true;
-          break;
-        }
+        break;
       }
     }
 

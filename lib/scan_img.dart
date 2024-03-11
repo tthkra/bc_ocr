@@ -43,7 +43,6 @@ class _ScannedImgState extends State<ScannedImg> {
             extractedTexts.add(line.text);
           }
         }
-        print(extractedTexts);
         widget.processor.processTextArray(extractedTexts);
 
       }
